@@ -33,7 +33,7 @@ print(df["method"].value_counts().plot.barh())
 plt.show()
 df_num = df.select_dtypes(include=["float64","int64"])
 print(df_num.describe())
-print(df_num["distance"].describe())"""
+print(df_num["distance"].describe())
 #veri seti hikayesi
 diamond = sns.load_dataset("diamonds")
 df = diamond.copy()
@@ -50,13 +50,31 @@ cut_kategoriler = ["Fair","Good","Very Good","Premium","Ideal"]
 df.cut = df.cut.astype(CategoricalDtype(ordered=True,categories=cut_kategoriler))
 #print(df.cut.head)
 #print(df["cut"].value_counts())
-"""print(df["cut"]
+print(df["cut"]
       .value_counts()
       .plot.barh()
-      .set_title("cut degiskeninin sınıf frekansları"))"""
+      .set_title("cut degiskeninin sınıf frekansları"))
 #cut degişkeninin sınıf frekanlarını grafik ile göstermek
 #plt.show()
 print(sns.barplot(x="cut",y=df.cut.index,data=df))
+plt.show()
+#ÇAPRAZLAMALAR
+diamond = sns.load_dataset("diamonds")
+df = diamond.copy()
+cut_kategoriler = ["Fair","Good","Very Good","Premium","Ideal"]
+df.cut = df.cut.astype(CategoricalDtype(ordered=True,categories=cut_kategoriler))
+print(df.head())
+sns.catplot(x="cut",y="price",data=df) #catplot kategorik degişkenleri grafikleştirmek için kullanılır.
+plt.show()
+sns.barplot(x="cut",y="price",data=df,hue="color")
+plt.show()
+print(df.groupby(["cut","color"])["price"].mean()) #grafikte verilen renk ve kaliteye göre dagılımın fiyatının ortalama ne kadar olacagını gösterir."""
+diamond = sns.load_dataset("diamonds")
+df = diamond.copy()
+print(df.head())
+print(sns.distplot(df.price,kde=False))
+plt.show()
+print(sns.distplot(df.price))
 plt.show()
 
 
